@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import  Header  from '@/components/Header'
+import  {Header}  from '@/components/Header'
 import { PostCard } from '@/components/PostCard'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'

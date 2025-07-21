@@ -1,52 +1,57 @@
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { 
+  Brain, 
+  Search, 
+  Menu, 
+  X, 
+  ExternalLink 
+} from 'lucide-react'
 
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, X, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate();
-
-  const navigationItems = [
-    { name: "Home", path: "/" },
-    { name: "News", path: "/news" },
-    { name: "Tutorials", path: "/tutorials" },
-    { name: "Articles", path: "/articles" },
-    { name: "Research", path: "/research" },
-    { name: "Product Reviews", path: "/product-reviews" },
-    { name: "Threads", path: "/threads" },
-  ];
+export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const navigate = useNavigate()
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery("");
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+      setSearchQuery('')
     }
-  };
+  }
+
+  const navigation = [
+    { name: 'Home', href: '/' },
+    { name: 'News', href: '/news' },
+    { name: 'Tutorials', href: '/tutorials' },
+    { name: 'Articles', href: '/articles' },
+    { name: 'Research', href: '/research' },
+    { name: 'Reviews', href: '/product-reviews' },
+    { name: 'Threads', href: '/threads' },
+  ]
 
   return (
-    <header className="bg-slate-900 text-white sticky top-0 z-50 shadow-lg border-b border-purple-500/20">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 hover:text-purple-400 transition-colors">
-            <Zap className="h-8 w-8 text-purple-400" />
-            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              AI Hub
-            </span>
-          </Link>
+    <header className="bg-slate-900 shadow-lg border-b border-slate-700 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo - AI Hub (no company branding) */}
+          <div className="flex items-center">
+            <Link to="/" className="flex items-center space-x-3">
+              <Brain className="h-8 w-8 text-blue-400" />
+              <span className="font-bold text-xl text-white">AI Hub</span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            {navigationItems.map((item) => (
+          <nav className="hidden lg:flex space-x-1">
+            {navigation.map((item) => (
               <Link
-                key={item.path}
-                to={item.path}
-                className="text-gray-300 hover:text-purple-400 transition-colors font-medium"
+                key={item.name}
+                to={item.href}
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 {item.name}
               </Link>
@@ -54,74 +59,72 @@ const Header = () => {
           </nav>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="hidden md:flex items-center space-x-2">
-            <div className="relative">
-              <Input
-                type="text"
-                placeholder="Search AI content..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 bg-slate-800 border-slate-700 text-white placeholder-gray-400 focus:border-purple-500"
-              />
-              <Button
-                type="submit"
-                size="sm"
-                className="absolute right-1 top-1 h-8 w-8 p-0 bg-purple-600 hover:bg-purple-700"
-              >
-                <Search className="h-4 w-4" />
-              </Button>
-            </div>
-          </form>
+          <div className="hidden md:flex items-center">
+            <form onSubmit={handleSearch} className="relative">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Input
+                  type="search"
+                  placeholder="Search posts..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 pr-4 py-2 w-64 text-sm bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-400"
+                />
+              </div>
+            </form>
+          </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          {/* Mobile menu button */}
+          <div className="lg:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-300 hover:text-white hover:bg-slate-800"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-slate-700 py-4">
-            <nav className="flex flex-col space-y-3">
-              {navigationItems.map((item) => (
+          <div className="lg:hidden border-t border-slate-700">
+            <div className="py-2 space-y-1">
+              {/* Mobile Search */}
+              <form onSubmit={handleSearch} className="px-3 py-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                  <Input
+                    type="search"
+                    placeholder="Search posts..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 pr-4 py-2 w-full text-sm bg-slate-800 border-slate-600 text-white placeholder-gray-400"
+                  />
+                </div>
+              </form>
+
+              {/* Mobile Navigation Links */}
+              {navigation.map((item) => (
                 <Link
-                  key={item.path}
-                  to={item.path}
-                  className="text-gray-300 hover:text-purple-400 transition-colors font-medium px-2 py-1"
+                  key={item.name}
+                  to={item.href}
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-            </nav>
-            <form onSubmit={handleSearch} className="mt-4 px-2">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Search AI content..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-slate-800 border-slate-700 text-white placeholder-gray-400 focus:border-purple-500"
-                />
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="absolute right-1 top-1 h-8 w-8 p-0 bg-purple-600 hover:bg-purple-700"
-                >
-                  <Search className="h-4 w-4" />
-                </Button>
-              </div>
-            </form>
+            </div>
           </div>
         )}
       </div>
     </header>
-  );
-};
-
-export default Header;
+  )
+}

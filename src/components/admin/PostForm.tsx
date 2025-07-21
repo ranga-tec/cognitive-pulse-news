@@ -12,6 +12,7 @@ import { ArrowLeft, Save, Eye } from 'lucide-react'
 import { RichTextEditor } from '@/components/RichTextEditor'
 import { supabase, Post, Category } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
+import { ImageUpload } from '../ImageUpload'
 
 interface PostFormProps {
   mode: 'create' | 'edit'
@@ -328,7 +329,97 @@ export function PostForm({ mode }: PostFormProps) {
                 </div>
               </CardContent>
             </Card>
+              {/* Enhanced Featured Image Section */}
+<Card className="mt-6">
+  <CardHeader>
+    <CardTitle>Featured Image</CardTitle>
+    <CardDescription>
+      This image will appear as a preview in post tiles and social media shares
+    </CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-4">
+    {/* Image URL Input */}
+    <div className="space-y-2">
+      <Label htmlFor="featured-image">Image URL</Label>
+      <Input
+        id="featured-image"
+        value={featuredImage}
+        onChange={(e) => setFeaturedImage(e.target.value)}
+        placeholder="https://example.com/image.jpg or upload to your server"
+        type="url"
+      />
+      <p className="text-xs text-gray-500">
+        Recommended size: 1200x630px for best social media sharing
+      </p>
+    </div>
 
+ 
+
+// Replace the featured image section in your PostForm.tsx with this:
+
+{/* Enhanced Featured Image Section with Server Upload */}
+<Card>
+  <CardHeader>
+    <CardTitle>Featured Image</CardTitle>
+    <CardDescription>
+      Upload an image to your server. This will appear as a preview in post tiles and social media shares.
+    </CardDescription>
+  </CardHeader>
+  <CardContent>
+    <ImageUpload
+      value={featuredImage}
+      onChange={setFeaturedImage}
+      label="Post Featured Image"
+    />
+  </CardContent>
+</Card>
+
+    {/* Quick Image Sources */}
+    <div className="space-y-2">
+      <Label>Quick Image Sources</Label>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+        <a 
+          href="https://unsplash.com/s/photos/artificial-intelligence" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="p-2 border rounded text-center hover:bg-gray-50 transition-colors"
+        >
+          <span className="font-medium">Unsplash</span><br/>
+          <span className="text-gray-500">Free AI photos</span>
+        </a>
+        <a 
+          href="https://pixabay.com/images/search/technology/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="p-2 border rounded text-center hover:bg-gray-50 transition-colors"
+        >
+          <span className="font-medium">Pixabay</span><br/>
+          <span className="text-gray-500">Free tech images</span>
+        </a>
+        <a 
+          href="https://pexels.com/search/machine%20learning/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="p-2 border rounded text-center hover:bg-gray-50 transition-colors"
+        >
+          <span className="font-medium">Pexels</span><br/>
+          <span className="text-gray-500">Free ML photos</span>
+        </a>
+      </div>
+    </div>
+
+    {/* Image Tips */}
+    <div className="bg-blue-50 p-3 rounded-lg">
+      <h4 className="font-medium text-blue-900 mb-2">💡 Image Tips:</h4>
+      <ul className="text-sm text-blue-800 space-y-1">
+        <li>• Use 16:9 aspect ratio (1200x675px) for best results</li>
+        <li>• Ensure images are optimized (under 500KB)</li>
+        <li>• Use descriptive alt text for accessibility</li>
+        <li>• Consider your brand colors and style</li>
+      </ul>
+    </div>
+  </CardContent>
+</Card>        
             {/* Action Buttons */}
             <div className="space-y-3">
               {status === 'published' ? (

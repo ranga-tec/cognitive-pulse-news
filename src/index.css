@@ -2,102 +2,467 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* NurAledge Brand Colors */
+:root {
+  --nuraledge-primary: #1e3a8a;     /* Deep corporate blue */
+  --nuraledge-secondary: #3b82f6;   /* Lighter blue */
+  --nuraledge-accent: #1d4ed8;      /* Medium blue */
+  --nuraledge-light: #eff6ff;       /* Very light blue */
+  --nuraledge-dark: #1e1b4b;        /* Dark blue */
+  --nuraledge-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+}
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+/* Basic reset and NurAledge typography */
+* {
+  box-sizing: border-box;
+}
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #1f2937;
+  background-color: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+/* NurAledge branded background */
+.nuraledge-gradient-bg {
+  background: var(--nuraledge-gradient);
+}
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+.nuraledge-light-bg {
+  background: var(--nuraledge-light);
+}
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+/* Override Tailwind with NurAledge colors */
+.bg-blue-50 {
+  background-color: var(--nuraledge-light) !important;
+}
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+.bg-blue-500 {
+  background-color: var(--nuraledge-primary) !important;
+}
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+.bg-blue-600 {
+  background-color: var(--nuraledge-accent) !important;
+}
 
-    --radius: 0.5rem;
+.text-blue-600 {
+  color: var(--nuraledge-primary) !important;
+}
 
-    --sidebar-background: 0 0% 98%;
+.text-blue-700 {
+  color: var(--nuraledge-dark) !important;
+}
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+.border-blue-500 {
+  border-color: var(--nuraledge-primary) !important;
+}
 
-    --sidebar-primary: 240 5.9% 10%;
+.ring-blue-100 {
+  --tw-ring-color: var(--nuraledge-light) !important;
+}
 
-    --sidebar-primary-foreground: 0 0% 98%;
+/* NurAledge button styles */
+.btn-nuraledge {
+  background: var(--nuraledge-gradient);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.1);
+}
 
-    --sidebar-accent: 240 4.8% 95.9%;
+.btn-nuraledge:hover {
+  background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 15px -3px rgba(30, 58, 138, 0.2);
+}
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+.btn-nuraledge-outline {
+  background: transparent;
+  color: var(--nuraledge-primary);
+  border: 2px solid var(--nuraledge-primary);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
 
-    --sidebar-border: 220 13% 91%;
+.btn-nuraledge-outline:hover {
+  background: var(--nuraledge-primary);
+  color: white;
+  transform: translateY(-1px);
+}
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+/* NurAledge card styles */
+.card-nuraledge {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 16px 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card-nuraledge:hover {
+  box-shadow: 0 10px 25px -3px rgba(30, 58, 138, 0.1);
+  transform: translateY(-2px);
+}
+
+/* NurAledge header styling */
+.nuraledge-header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* NurAledge hero section */
+.nuraledge-hero {
+  background: var(--nuraledge-gradient);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.nuraledge-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nuraledge-hero p {
+  font-size: 1.25rem;
+  opacity: 0.95;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+/* NurAledge statistics cards */
+.stats-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -4px rgba(30, 58, 138, 0.15);
+}
+
+.stats-card .icon {
+  color: var(--nuraledge-primary);
+  margin-bottom: 16px;
+}
+
+.stats-card .number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--nuraledge-dark);
+  margin-bottom: 8px;
+}
+
+.stats-card .label {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* NurAledge post cards */
+.post-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -4px rgba(30, 58, 138, 0.15);
+}
+
+.post-card.featured {
+  border: 2px solid var(--nuraledge-primary);
+  box-shadow: 0 8px 16px -4px rgba(30, 58, 138, 0.2);
+}
+
+.post-card .category-badge {
+  background: var(--nuraledge-light);
+  color: var(--nuraledge-primary);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.post-card .featured-badge {
+  background: var(--nuraledge-gradient);
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* NurAledge section headings */
+.section-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--nuraledge-dark);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  color: #6b7280;
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+}
+
+/* NurAledge footer */
+.nuraledge-footer {
+  background: var(--nuraledge-dark);
+  color: white;
+  padding: 60px 0 40px;
+}
+
+.nuraledge-footer h3 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.nuraledge-footer a {
+  color: #cbd5e1;
+  transition: color 0.3s ease;
+}
+
+.nuraledge-footer a:hover {
+  color: white;
+}
+
+/* Quill Editor with NurAledge theme */
+.ql-toolbar {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-color: #e5e7eb;
+  background: #f8fafc;
+}
+
+.ql-container {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-color: #e5e7eb;
+}
+
+.ql-editor {
+  min-height: 200px;
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ql-snow .ql-picker {
+  color: var(--nuraledge-dark);
+}
+
+.ql-snow .ql-stroke {
+  stroke: var(--nuraledge-primary);
+}
+
+.ql-snow .ql-fill {
+  fill: var(--nuraledge-primary);
+}
+
+/* Prose styles with NurAledge theme */
+.prose {
+  max-width: none;
+  color: #374151;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: var(--nuraledge-dark);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.prose h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose h2 {
+  font-size: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose a {
+  color: var(--nuraledge-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.prose a:hover {
+  color: var(--nuraledge-accent);
+  text-decoration: underline;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--nuraledge-primary);
+  background-color: var(--nuraledge-light);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  font-style: normal;
+}
+
+.prose blockquote p {
+  margin: 0;
+  color: var(--nuraledge-dark);
+}
+
+.prose code {
+  background-color: var(--nuraledge-light);
+  color: var(--nuraledge-dark);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-weight: 600;
+}
+
+.prose pre {
+  background-color: var(--nuraledge-dark);
+  color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.875rem;
+}
+
+.prose pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-weight: normal;
+}
+
+/* Admin panel with NurAledge theme */
+.admin-sidebar {
+  background: var(--nuraledge-dark);
+  color: white;
+}
+
+.admin-sidebar a {
+  color: #cbd5e1;
+  transition: all 0.3s ease;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background: var(--nuraledge-primary);
+  color: white;
+}
+
+/* Form elements with NurAledge styling */
+.form-input {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--nuraledge-primary);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* Loading spinner with NurAledge colors */
+.loading-spinner {
+  border: 3px solid var(--nuraledge-light);
+  border-top: 3px solid var(--nuraledge-primary);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .nuraledge-hero h1 {
+    font-size: 2.5rem;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  
+  .nuraledge-hero p {
+    font-size: 1.125rem;
+  }
+  
+  .section-heading {
+    font-size: 2rem;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+/* Utility classes for NurAledge theme */
+.text-nuraledge {
+  color: var(--nuraledge-primary);
+}
 
-  body {
-    @apply bg-background text-foreground;
-  }
+.bg-nuraledge {
+  background: var(--nuraledge-gradient);
+}
+
+.border-nuraledge {
+  border-color: var(--nuraledge-primary);
+}
+
+.shadow-nuraledge {
+  box-shadow: 0 10px 25px -3px rgba(30, 58, 138, 0.1);
 }

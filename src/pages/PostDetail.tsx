@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import  Header  from '@/components/Header'
+import  {Header}  from '@/components/Header'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Calendar, ArrowLeft, MessageSquare, Clock, Eye } from 'lucide-react'
