@@ -1,3 +1,4 @@
+// pages/PostDetail.tsx
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import  {Header}  from '@/components/Header'
@@ -199,16 +200,49 @@ export function PostDetail() {
 
         {/* Post Content */}
         <div className="bg-white rounded-xl shadow-sm p-8 mb-12">
+          <style jsx>{`
+            .blog-post-content p,
+            .blog-post-content div,
+            .blog-post-content span,
+            .blog-post-content li {
+              text-align: left !important;
+            }
+            
+            .blog-post-content .ql-align-center {
+              text-align: center !important;
+            }
+            
+            .blog-post-content .ql-align-right {
+              text-align: right !important;
+            }
+            
+            .blog-post-content .ql-align-justify {
+              text-align: justify !important;
+            }
+            
+            .blog-post-content .ql-indent-1,
+            .blog-post-content .ql-indent-2,
+            .blog-post-content .ql-indent-3,
+            .blog-post-content .ql-indent-4,
+            .blog-post-content .ql-indent-5,
+            .blog-post-content .ql-indent-6,
+            .blog-post-content .ql-indent-7,
+            .blog-post-content .ql-indent-8 {
+              text-align: left !important;
+            }
+          `}</style>
+          
           <div 
-            className="prose prose-lg prose-gray max-w-none 
+            className="blog-post-content prose prose-lg prose-gray max-w-none 
                        prose-headings:text-gray-900 prose-headings:font-bold
-                       prose-p:text-gray-700 prose-p:leading-relaxed
+                       prose-p:text-gray-700 prose-p:leading-relaxed prose-p:text-left
                        prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
                        prose-strong:text-gray-900 prose-strong:font-semibold
                        prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded
                        prose-pre:bg-gray-900 prose-pre:text-gray-100
-                       prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:pl-6
-                       prose-img:rounded-lg prose-img:shadow-md"
+                       prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:pl-6 prose-blockquote:text-left
+                       prose-img:rounded-lg prose-img:shadow-md
+                       prose-li:text-left"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
