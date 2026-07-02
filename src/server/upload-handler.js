@@ -16,7 +16,6 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024, // 5MB limit
   },
   fileFilter: (req, file, cb) => {
-    // Allow only images
     if (file.mimetype.startsWith('image/')) {
       cb(null, true)
     } else {
@@ -32,47 +31,47 @@ router.post('/api/upload-image', upload.single('image'), async (req, res) => {
       return res.status(400).json({ success: false, error: 'No file uploaded' })
     }
 
-    // Generate unique filename
-    const fileExtension = path.extname(req.file.originalname) || '.jpg'
-    const fileName = `${uuidv4()}${fileExtension}`
-    
-    // Create upload directory if it doesn't exist
     const uploadDir = path.join(__dirname, '../public/uploads/blog-images')
     await fs.mkdir(uploadDir, { recursive: true })
-    
+
+    const baseName = uuidv4()
+    const targetExt = '.webp'
+    const fileName = `${baseName}${targetExt}`
     const filePath = path.join(uploadDir, fileName)
 
-    // Process image with Sharp (resize, optimize)
-    let processedImage = sharp(req.file.buffer)
+    const baseImage = sharp(req.file.buffer, { failOn: 'none' }).rotate()
+    const metadata = await baseImage.metadata()
+    const maxDimension = 1600
 
-    // Resize to optimal dimensions (1200x630 for social sharing)
-    if (req.body.resize === 'true') {
-      processedImage = processedImage
-        .resize(1200, 630, {
-          fit: 'cover',
-          position: 'center'
-        })
-        .jpeg({ quality: 85, progressive: true })
-    }
+    const processedImage = baseImage
+      .resize({
+        width: maxDimension,
+        height: maxDimension,
+        fit: 'inside',
+        withoutEnlargement: true,
+      })
+      .webp({
+        quality: 82,
+        effort: 5,
+        smartSubsample: true,
+        lossless: metadata.hasAlpha || false,
+      })
 
-    // Save the processed image
     await processedImage.toFile(filePath)
 
-    // Generate public URL
     const publicUrl = `/uploads/blog-images/${fileName}`
-    const fullUrl = `https://blog.nuraledge.com${publicUrl}`
+    const fullUrl = `https://blog.neuralsedge.com${publicUrl}`
 
-    // Log successful upload
-    console.log(`Image uploaded: ${fileName} (${req.file.size} bytes)`)
+    console.log(`Image uploaded: ${fileName} (${req.file.size} bytes -> webp)` )
 
     res.json({
       success: true,
       url: fullUrl,
       filename: fileName,
       size: req.file.size,
-      originalName: req.file.originalname
+      originalName: req.file.originalname,
+      format: 'webp',
     })
-
   } catch (error) {
     console.error('Upload error:', error)
     res.status(500).json({
