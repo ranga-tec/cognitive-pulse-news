@@ -90,7 +90,7 @@ export function PostCard({ post, featured = false, compact = false }: PostCardPr
     <Link
       to={`/post/${post.id}`}
       className={`group block h-full rounded-md border bg-white transition-all hover:border-slate-400 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 ${
-        featured ? 'border-slate-300 lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:items-start' : 'border-slate-200'
+        featured ? 'border-slate-300 lg:grid lg:grid-cols-[1.15fr_0.85fr] lg:items-start' : 'border-slate-200'
       }`}
     >
       {post.featured_image && (
