@@ -90,11 +90,11 @@ export function PostCard({ post, featured = false, compact = false }: PostCardPr
     <Link
       to={`/post/${post.id}`}
       className={`group block h-full rounded-md border bg-white transition-all hover:border-slate-400 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 ${
-        featured ? 'border-slate-300 lg:grid lg:grid-cols-[1.15fr_0.85fr] lg:items-start' : 'border-slate-200'
+        featured ? 'border-slate-300 lg:grid lg:grid-cols-[1.15fr_0.85fr]' : 'border-slate-200'
       }`}
     >
       {post.featured_image && (
-        <div className={`card-image relative overflow-hidden ${featured ? 'aspect-video rounded-t-md bg-slate-100 lg:rounded-l-md lg:rounded-tr-none' : 'aspect-video rounded-t-md bg-slate-100'}`}>
+        <div className={`card-image relative overflow-hidden ${featured ? 'aspect-video rounded-t-md bg-slate-100 lg:aspect-auto lg:h-full lg:rounded-l-md lg:rounded-tr-none' : 'aspect-video rounded-t-md bg-slate-100'}`}>
           <img
             src={post.featured_image}
             alt={postTitle}
